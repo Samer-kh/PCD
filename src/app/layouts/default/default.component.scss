@@ -1,0 +1,56 @@
+.form-container {
+    display:block;
+    width:90%;
+    padding:2em;
+    margin: 2em auto;
+    background:#fff;
+    border-radius: 5%;
+}
+
+.alert {
+    background: #f2edda;
+    padding: 7px;
+    font-size: .9em;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: 2s alertAnim forwards;
+}
+
+.button {
+    margin-top: 3rem;
+}
+h1 {
+    margin-bottom: 2rem;
+    font-weight:bold;
+    font-family:'Muli';
+    font-size: 2em;
+}
+
+
+@keyframes alertAnim {
+    from {
+        opacity:0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+:host{
+    display : flex ;
+    flex-direction : column ;
+    height : 100%
+}
+mat-drawer{
+
+    width : 20%;
+}
+
+mat-drawer-container {
+    height : 100%;
+}
+mat-drawer-content {
+    padding: 2%;
+}

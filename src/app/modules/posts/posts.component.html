@@ -1,0 +1,45 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stast-cards">
+  <mat-card fxFlex="50">
+    <h2 style="text-align: center; color: blue; font-style: italic;">Employe's Controle Table</h2>
+  </mat-card>
+  <mat-card fxFlex="25">
+    <div style="margin-left: 25%;"><span class="delete" (click)="deleteAllEmployee()"><button mat-raised-button color="warn" >Delete All</button></span></div>
+  
+  </mat-card>
+  <mat-card fxFlex="25">
+    <div style="margin-left: 25%;"><button mat-raised-button color="primary" routerLink="/create-employee" >Add User</button></div>
+  </mat-card>
+
+</div>
+<br>
+<mat-divider></mat-divider>
+<br>
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stast-cards">
+  <mat-card fxFlex="100">
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col" >Id</th>
+    <th scope="col">Name</th>
+    <th scope="col" >E-mail</th>
+    <th scope="col">Phone</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let employee of Employee">
+    <th scope="row">{{ employee.id}}</th>
+    <td>
+     {{ employee.name }}
+    </td>
+    <td>{{ employee.email }}</td>
+    <td>{{ employee.phone }}</td>
+    <td>  <span class="edit" routerLink="/employee-edit/{{employee.id}}"><button mat-flat-button color="primary"  routerLink="/employee-edit/{{employee.id}}">Edit</button>
+    </span> </td>
+    <td><span class="delete" (click)="deleteEmployee(employee.id)"> <button mat-raised-button color="warn">Delete</button></span></td>
+  </tr>
+  </tbody>
+</table>
+</mat-card>
+</div>
