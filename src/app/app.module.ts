@@ -7,14 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { DefaultModule } from './layouts/default/default.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {IrisService} from './modules/employee-create/iris.service';
+import {HttpClient} from '@angular/common/http';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    
-    
+
+
 
   ],
   imports: [
@@ -23,10 +25,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     MatButtonModule,
     DefaultModule,
-    FlexLayoutModule
+    FlexLayoutModule,
 
   ],
-  providers: [],
+  providers: [IrisService,
+  HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
