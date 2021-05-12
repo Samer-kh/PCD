@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RestApiService } from 'src/app/api/rest-api.service';
-import {Iris, ProbabilityPrediction, SVCParameters, SVCResult} from './types';
 import {IrisService} from './iris.service';
 import {FileUploadService} from './file-upload.service';
-import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {Iris, ProbabilityPrediction, SVCParameters, SVCResult} from './types';
 import {Observable} from 'rxjs';
+import {HttpEventType, HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-employee-create',
@@ -13,18 +13,17 @@ import {Observable} from 'rxjs';
   styleUrls: ['./employee-create.component.scss']
 })
 export class EmployeeCreateComponent implements OnInit {
-
-  @Input() employeeDetails = { name: '', email: '', phone: '', files: [] };
+  selectedFiles: FileList = null;
+  @Input() employeeDetails = { name: '', email: '', phone: '', files: this.selectedFiles };
   public svcParameters: SVCParameters = new SVCParameters();
   public svcResult: SVCResult;
   public iris: Iris = new Iris();
   public probabilityPredictions: ProbabilityPrediction[];
-  shortLink = '';
-  loading = false; // Flag variable
-  files: FileList;
+
+  file: FileList = null;
   progressInfos = [];
   message = '';
-  fileInfos: Observable<any>;
+
   constructor(
     public restApi: RestApiService,
     public router: Router,
@@ -32,47 +31,26 @@ export class EmployeeCreateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fileInfos = this.fileUploadService.getFiles();
   }
 
-  addEmployee(dataEmployee) {
+  addEmployee() {
     this.restApi.createEmployee(this.employeeDetails).subscribe((data: {}) => {
-      this.router.navigate(['/posts']),
-      this.trainModel();
+      this.router.navigate(['/posts']);
     });
   }
 
-  // tslint:disable-next-line:typedef
-  public trainModel() {
-    this.irisService.trainModel(this.svcParameters).subscribe((svcResult) => {
-      this.svcResult = svcResult;
-    });
-  }
-
-  // tslint:disable-next-line:typedef
-  public predictIris() {
-    this.irisService.predictIris(this.iris).subscribe((probabilityPredictions) => {
-      this.probabilityPredictions = probabilityPredictions;
-    });
-  }
-
-  // On file Select
-  // tslint:disable-next-line:typedef
-  onChange(event) {
-    this.files = event.target.files;
+  selectFiles(event) {
+    this.progressInfos = [];
+    this.selectedFiles = event.target.files;
+    this.employeeDetails.files = this.selectedFiles;
   }
 
   uploadFiles() {
     this.message = '';
 
-    for (let i = 0; i < this.files.length; i++) {
-      this.upload(i, this.files[i]);
+    for (let i = 0; i < this.selectedFiles.length; i++) {
+      this.upload(i, this.selectedFiles[i]);
     }
-  }
-
-  selectFiles(event) {
-    this.progressInfos = [];
-    this.files = event.target.files;
   }
 
   upload(idx, file) {
@@ -82,8 +60,6 @@ export class EmployeeCreateComponent implements OnInit {
       event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          this.fileInfos = this.fileUploadService.getFiles();
         }
       },
       err => {
@@ -91,8 +67,5 @@ export class EmployeeCreateComponent implements OnInit {
         this.message = 'Could not upload the file:' + file.name;
       });
   }
-
-
- 
 
 }

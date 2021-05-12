@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import * as Highcharts from "highcharts";
+import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import { RestApiService } from '../../../api/rest-api.service';
 
-let n : number =0;
-var variable : number;
-var variable2 : number;
-var PresenceRate : number ;
+let n = 0;
+let variable: number;
+let variable2: number;
+let PresenceRate: number ;
 @Component({
   selector: 'app-widget-area',
   templateUrl: './area.component.html',
@@ -15,25 +15,25 @@ var PresenceRate : number ;
 
 export class AreaComponent implements OnInit {
   Highcharts = Highcharts;
-  
-  EmployeeNumber : number ;
- EntranceNumber : number  ;
+
+  EmployeeNumber: number ;
+ EntranceNumber: number  ;
   Entrance: any = [];
-  Employee : any = [];
-  chartOptions = {}
+  Employee: any = [];
+  chartOptions = {};
 
   constructor(public restApi: RestApiService) { }
 
   ngOnInit() {
     this.loadEntrance();
     this.loadEmployee();
-    
+
     this.numberEntrance();
     this.numberEmployee();
-    console.log(this.EntranceNumber + 'samer')
-    
-    PresenceRate = this.EntranceNumber/this.EmployeeNumber
-    console.log(PresenceRate+'hama')
+    console.log(this.EntranceNumber + 'samer');
+
+    PresenceRate = this.EntranceNumber / this.EmployeeNumber;
+    console.log(PresenceRate + 'hama');
     this.chartOptions = {
       chart: {
           plotBackgroundColor: null,
@@ -67,7 +67,7 @@ export class AreaComponent implements OnInit {
           colorByPoint: true,
           data: [{
               name: 'Present',
-              y:80,
+              y: 80,
               sliced: true,
               selected: true
           }, {
@@ -89,15 +89,15 @@ export class AreaComponent implements OnInit {
     });
   }
   numberEntrance()  {
-    
+
    this.restApi.getEntrance().subscribe((data: {}) => {
       this.Entrance = data;
-      n=this.Entrance.length
-     console.log(n+ 'entrance')
+      n = this.Entrance.length;
+      console.log(n + 'entrance');
 
     });
 
-    this.EntranceNumber=n
+   this.EntranceNumber = n;
   }
   loadEmployee() {
     return this.restApi.getEmployees().subscribe((data: {}) => {
@@ -107,11 +107,11 @@ export class AreaComponent implements OnInit {
   numberEmployee()  {
     this.restApi.getEmployees().subscribe((data: {}) => {
       this.Employee = data;
-      this.EmployeeNumber=this.Employee.length
-     console.log(this.EmployeeNumber + ' employee')
-      
-    
+      this.EmployeeNumber = this.Employee.length;
+      console.log(this.EmployeeNumber + ' employee');
+
+
     });
   }
- 
+
 }

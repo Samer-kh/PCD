@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
 })
 export class FetchService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.getJSON().subscribe(data => {
       console.log(data);
   });
 }
    public getJSON(): Observable<any> {
-    return this.http.get("./data/data.json");
+    return this.http.get('./data/data.json');
 
   }
 

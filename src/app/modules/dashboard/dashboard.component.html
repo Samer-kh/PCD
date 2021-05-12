@@ -9,7 +9,9 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Entance Time</th>
+                <th>Entrance Date</th>
+                <th>Entrance Time</th>
+                <th>Departure Date</th>
                 <th>Departure Time</th>
             </tr>
         </thead>
@@ -22,8 +24,10 @@
             <td>
              {{ employeeEntr.name }}
             </td>
-            <td>{{ employeeEntr.EntranceDate}}</td>
-            <td>{{ employeeEntr.DepartureDate }}</td>
+            <td>{{ employeeEntr.entranceDate}}</td>
+            <td>{{ employeeEntr.entranceTime}}</td>
+            <td>{{ employeeEntr.departureDate }}</td>
+            <td>{{ employeeEntr.departureTime}}</td>
         </tbody>
         <!--Table body-->
 
@@ -70,6 +74,8 @@
           <th scope="col">Name</th>
           <th scope="col">phone</th>
           <th scope="col">email</th>
+          <th scope="col">enter</th>
+          <th scope="col">depart</th>
         </tr>
         </thead>
         <tbody>
@@ -83,6 +89,12 @@
           </td>
           <td>
             {{emp.email }}
+          </td>
+          <td>
+            <span (click)="enter(emp.id)"> <button mat-raised-button color="warn">Enter</button></span>
+          </td>
+          <td>
+            <span (click)="depart(emp.id)"> <button mat-raised-button color="warn">Depart</button></span>
           </td>
         </tr>
         </tbody>

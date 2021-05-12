@@ -8,7 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { DefaultModule } from './layouts/default/default.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {IrisService} from './modules/employee-create/iris.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 
 
@@ -26,10 +26,11 @@ import {HttpClient} from '@angular/common/http';
     MatButtonModule,
     DefaultModule,
     FlexLayoutModule,
+    HttpClientModule
 
   ],
   providers: [IrisService,
-  HttpClient],
+              HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

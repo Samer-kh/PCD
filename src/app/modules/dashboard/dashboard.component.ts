@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { RestApiService } from '../../api/rest-api.service';
 import {NgbCalendar, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-
+import {Entrance} from '../../api/entrance';
 
 
 
@@ -13,30 +13,29 @@ import {NgbCalendar, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class DashboardComponent implements OnInit {
- 
+
   Entrance: any = [];
-  Employee : any = [];
-  constructor(public restApi: RestApiService ,private calendar: NgbCalendar) { }
+  Employee: any = [];
+  constructor(public restApi: RestApiService , private calendar: NgbCalendar) { }
   today = this.calendar.getToday();
   model: NgbDateStruct = this.today;
-  StringModal : string 
+  StringModal: string;
+  entrance: {};
   @Input('ngModel')
   ngOnInit() {
-    console.log(this.model)
     this.loadEmployee();
-   this. StringModal = this.model.year + '-' +this.model.month+'-' +this.model.day;
-   this.loadEntrance();
+    this.StringModal = this.model.year + '-' + this.model.month + '-' + this.model.day;
+    this.loadEntrance();
   }
-  onChange(UpdatedValue : NgbDateStruct) :void
-  {
+  onChange(UpdatedValue: NgbDateStruct): void {
     this.model = UpdatedValue;
-    console.log(this.model)
-    this. StringModal = this.model.year + '-' +this.model.month+'-' +this.model.day;
+    this.StringModal = this.model.year + '-' + this.model.month + '-' + this.model.day;
     this.loadEntrance();
   }
   loadEntrance() {
     return this.restApi.getEntranceByDate(this.StringModal).subscribe((data: {}) => {
-      this.Entrance = data;
+      this.Entrance = data,
+      console.log(this.Entrance);
     });
   }
   loadEmployee() {
@@ -44,5 +43,19 @@ export class DashboardComponent implements OnInit {
       this.Employee = data;
     });
   }
- 
+
+  enter(id) {
+    return this.restApi.enterEmployee(id).subscribe((data: {}) => {
+      this.loadEmployee(),
+        this.loadEntrance();
+    });
+  }
+
+  depart(id) {
+    return this.restApi.departEmployee(id).subscribe((data: {}) => {
+      this.loadEmployee(),
+        this.loadEntrance();
+    });
+  }
+
 }

@@ -7,7 +7,7 @@ import { MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatMen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 import { AreaComponent } from './widgets/area/area.component';
-import {HighchartsChartModule} from "highcharts-angular";
+import {HighchartsChartModule} from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import {HighchartsChartModule} from "highcharts-angular";
     FooterComponent,
     SidebarComponent,
     AreaComponent
-   
+
   ],
   imports: [
     CommonModule,
@@ -35,8 +35,8 @@ import {HighchartsChartModule} from "highcharts-angular";
     SidebarComponent,
     AreaComponent
   ]
-  
 
-  
+
+
 })
 export class SharedModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../../api/rest-api.service';
+import {Router} from '@angular/router';
 
 
 
@@ -10,15 +11,15 @@ import { RestApiService } from '../../api/rest-api.service';
 })
 export class PostsComponent implements OnInit {
 
- 
-  
+
+
   Employee: any = [];
 
   page = 1;
   pageSize = 4;
   collectionSize = this.Employee.length;
-  
-  constructor( public restApi: RestApiService) { }
+
+  constructor( public restApi: RestApiService, public router: Router) { }
 
   ngOnInit() {
     this.loadEmployees();
@@ -39,13 +40,13 @@ export class PostsComponent implements OnInit {
   }
   deleteAllEmployee() {
     if (window.confirm('Are you sure, you want to delete?')) {
-      this.loadEmployees()
-      for (var emp of this.Employee) {
+      this.loadEmployees();
+      for (let emp of this.Employee) {
       this.restApi.deleteEmployee(emp.id).subscribe(data => {
         this.loadEmployees();
       });
     }
-   
+
   }
   }
 }

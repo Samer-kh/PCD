@@ -12,7 +12,7 @@ import { retry, catchError } from 'rxjs/operators';
 export class RestApiService {
 
   // Define API
-  apiURL = 'http://localhost:3000';
+  apiURL = 'http://localhost:5000';
 
   constructor(private http: HttpClient) { }
 
@@ -34,14 +34,14 @@ export class RestApiService {
   }
 
   getEntrance(): Observable<Entrance> {
-    return this.http.get<Entrance>(this.apiURL + '/entrance')
+    return this.http.get<Entrance>(this.apiURL + '/entrances')
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
   getEntranceByDate(date): Observable<Entrance> {
-    return this.http.get<Entrance>(this.apiURL + '/entrance' + date)
+    return this.http.get<Entrance>(this.apiURL + '/entrances/' + date)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -59,7 +59,7 @@ export class RestApiService {
 
   // HttpClient API post() method => Create employee
   createEmployee(employee): Observable<Employee> {
-    return this.http.post<Employee>(this.apiURL + '/employees', JSON.stringify(employee), this.httpOptions)
+    return this.http.post<Employee>(this.apiURL + '/employees/create', JSON.stringify(employee), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -68,7 +68,7 @@ export class RestApiService {
 
   // HttpClient API put() method => Update employee
   updateEmployee(id, employee): Observable<Employee> {
-    return this.http.put<Employee>(this.apiURL + '/employees/' + id, JSON.stringify(employee), this.httpOptions)
+    return this.http.put<Employee>(this.apiURL + '/employees/update/' + id, JSON.stringify(employee), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -77,11 +77,27 @@ export class RestApiService {
 
   // HttpClient API delete() method => Delete employee
   deleteEmployee(id) {
-    return this.http.delete<Employee>(this.apiURL + '/employees/' + id, this.httpOptions)
+    return this.http.delete<Employee>(this.apiURL + '/employees/delete/' + id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
+  }
+
+  enterEmployee(id) {
+    return this.http.get<Entrance>(this.apiURL + '/employee/' + id + '/enter', this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  departEmployee(id) {
+    return this.http.get<Entrance>(this.apiURL + '/employee/' + id + '/depart', this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
 
