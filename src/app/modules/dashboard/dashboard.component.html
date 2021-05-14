@@ -24,10 +24,13 @@
             <td>
              {{ employeeEntr.name }}
             </td>
+
             <td>{{ employeeEntr.entranceDate}}</td>
             <td>{{ employeeEntr.entranceTime}}</td>
-            <td>{{ employeeEntr.departureDate }}</td>
-            <td>{{ employeeEntr.departureTime}}</td>
+            <td *ngIf="employeeEntr.departureTime != employeeEntr.entranceTime">{{ employeeEntr.departureDate }}</td>
+            <td *ngIf="employeeEntr.departureDate === employeeEntr.entranceDate && employeeEntr.departureTime === employeeEntr.entranceTime">HERE NOW</td>
+            <td *ngIf="employeeEntr.departureTime != employeeEntr.entranceTime" >{{ employeeEntr.departureTime}}</td>
+            <td *ngIf="employeeEntr.departureDate === employeeEntr.entranceDate && employeeEntr.departureTime === employeeEntr.entranceTime">HERE NOW</td>
         </tbody>
         <!--Table body-->
 

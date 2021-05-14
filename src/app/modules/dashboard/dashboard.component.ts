@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RestApiService } from '../../api/rest-api.service';
 import {NgbCalendar, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import {Entrance} from '../../api/entrance';
 
 
 
@@ -34,8 +33,7 @@ export class DashboardComponent implements OnInit {
   }
   loadEntrance() {
     return this.restApi.getEntranceByDate(this.StringModal).subscribe((data: {}) => {
-      this.Entrance = data,
-      console.log(this.Entrance);
+      this.Entrance = data;
     });
   }
   loadEmployee() {

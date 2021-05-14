@@ -24,6 +24,19 @@ export class FileUploadService {
     return this.http.request(req);
   }
 
+  uploadOnefile(file: File): Observable<any> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', this.baseUrl + '/employee/enter', formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.http.request(req);
+  }
+
 
 
 }

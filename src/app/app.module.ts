@@ -9,12 +9,16 @@ import { DefaultModule } from './layouts/default/default.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {IrisService} from './modules/employee-create/iris.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { EmployeeEnterComponent } from './modules/employee-enter/employee-enter.component';
+import {MatCardModule, MatDividerModule} from '@angular/material';
+import {FormsModule} from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    EmployeeEnterComponent,
 
 
 
@@ -26,7 +30,10 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     MatButtonModule,
     DefaultModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDividerModule,
+    MatCardModule,
+    FormsModule
 
   ],
   providers: [IrisService,

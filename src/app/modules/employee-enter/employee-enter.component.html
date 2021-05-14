@@ -1,0 +1,55 @@
+<div class="container custom-container">
+  <div class="col-md-12">
+    <h1 class="mb-3 text-center" style="font-style: italic;color: sienna;text-align: center;">Enter your signature</h1>
+
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stast-cards">
+      <mat-card fxFlex="100">
+        <div class="form-group">
+          <div *ngIf="progressInfos" class="mb-2">
+            <span>{{ progressInfos.fileName }}</span>
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-info progress-bar-striped"
+                role="progressbar"
+                attr.aria-valuenow="{{ progressInfos.value }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [ngStyle]="{ width: progressInfos.value + '%' }"
+              >
+                {{ progressInfos.value }}%
+              </div>
+            </div>
+          </div>
+
+          <label class="btn btn-default">
+            <input type="file" (change)="selectFiles($event)" />
+          </label>
+
+          <button
+            class="btn btn-success"
+            [disabled]="!selectedFile"
+            (click)="upload(this.selectedFile)"
+          >
+            Upload
+          </button>
+
+          <div class="alert alert-light" role="alert">{{ message }}</div>
+
+
+        </div>
+
+        <div class="form-group">
+          <button [disabled]="this.active" class="btn btn-success btn-lg btn-block" (click)="enterEmployee()">ENTER</button>
+        </div>
+
+      </mat-card>
+      <mat-card>
+        <div class="blockquote" *ngIf="this.data">{{this.data.body.result}}</div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

@@ -100,6 +100,15 @@ export class RestApiService {
       );
   }
 
+  enter(employee): Observable<Employee> {
+    return this.http.post<Employee>(this.apiURL + '/employee/enter', JSON.stringify(employee), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+
 
   // Error handling
   handleError(error) {
