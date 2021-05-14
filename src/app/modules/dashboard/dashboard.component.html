@@ -77,7 +77,6 @@
           <th scope="col">Name</th>
           <th scope="col">phone</th>
           <th scope="col">email</th>
-          <th scope="col">enter</th>
           <th scope="col">depart</th>
         </tr>
         </thead>
@@ -92,9 +91,6 @@
           </td>
           <td>
             {{emp.email }}
-          </td>
-          <td>
-            <span (click)="enter(emp.id)"> <button mat-raised-button color="warn">Enter</button></span>
           </td>
           <td>
             <span (click)="depart(emp.id)"> <button mat-raised-button color="warn">Depart</button></span>
